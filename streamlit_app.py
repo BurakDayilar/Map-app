@@ -77,21 +77,15 @@ if uploaded_file is not None:
                             fill_opacity=1
                         ).add_to(m)
     
-    # Legend HTML oluştur
-    legend_html = """
-        <div style="position: fixed; top: 50px; right: 50px; z-index: 9999; 
-                    background-color: white; padding: 20px; border:2px solid grey; 
-                    border-radius:5px; font-size:16px;">
-    """
-    for tech, counts in legend_counts.items():
-        legend_html += f"<b>{tech} Number of Cells by Vendor</b><br>"
-        legend_html += f"<i style='background: {types_vendors_colors[tech]['eri_color']}; width: 15px; height: 15px; display: inline-block;'></i> Ericsson ({counts['ERI']})<br>"
-        legend_html += f"<i style='background: {types_vendors_colors[tech]['hwi_color']}; width: 15px; height: 15px; display: inline-block;'></i> Huawei ({counts['HWI']})<br>"
-    legend_html += "</div>"
-    m.get_root().html.add_child(folium.Element(legend_html))
+    # Legend bilgilerini Streamlit içinde gösterelim
+    with st.sidebar:
+        st.header("📊 Legend - Number of Cells by Vendor")
+        for tech, counts in legend_counts.items():
+            st.markdown(f"### {tech} Number of Cells by Vendor")
+            st.markdown(f"- 🟠 **Ericsson**: {counts['ERI']}")
+            st.markdown(f"- ⚫ **Huawei**: {counts['HWI']}")
     
     # Haritayı ekranda daha büyük göster
-    folium_static(m, width=1200, height=700)
+    folium_static(m, width=1400, height=900)
     
     st.success("✅ Harita başarıyla oluşturuldu!")
-    
