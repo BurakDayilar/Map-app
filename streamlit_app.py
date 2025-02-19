@@ -94,3 +94,4 @@ if uploaded_file is not None:
     folium_static(m, width=1200, height=700)
     
     st.success("✅ Harita başarıyla oluşturuldu!")
+    
