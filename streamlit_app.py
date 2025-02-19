@@ -81,9 +81,11 @@ if uploaded_file is not None:
     with st.sidebar:
         st.header("📊 Legend - Number of Cells by Vendor")
         for tech, counts in legend_counts.items():
+            eri_color = types_vendors_colors[tech]["eri_color"]
+            hwi_color = types_vendors_colors[tech]["hwi_color"]
             st.markdown(f"### {tech} Number of Cells by Vendor")
-            st.markdown(f"- 🟠 **Ericsson**: {counts['ERI']}")
-            st.markdown(f"- ⚫ **Huawei**: {counts['HWI']}")
+            st.markdown(f"- <span style='color:{eri_color}; font-weight:bold;'>■</span> **Ericsson**: {counts['ERI']}", unsafe_allow_html=True)
+            st.markdown(f"- <span style='color:{hwi_color}; font-weight:bold;'>■</span> **Huawei**: {counts['HWI']}", unsafe_allow_html=True)
     
     # Haritayı ekranda daha büyük göster
     folium_static(m, width=1400, height=900)
